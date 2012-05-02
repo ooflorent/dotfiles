@@ -31,7 +31,7 @@
         autocrlf = input
         safecrlf = true
         quotepath = false
-        excludesfile = ~/.dotfiles/git/gitignore
+        excludesfile = ~/.gitignore
 [diff]
 	mnemonicprefix = true
 [push]
