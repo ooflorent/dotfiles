@@ -1,40 +1,46 @@
+[user]
+    name = Florent Cailhol
+    email = florent.cailhol@gmail.com
 [alias]
-	c = commit -m
-	ca = commit -am
-	ci = commit
-	co = checkout
-	go = checkout -B
-	s = status -s
-	st = status
+    c = commit -m
+    ca = commit -am
+    ci = commit
+    co = checkout
+    go = checkout -B
+    df = diff
+    dfs = diff --ignore-all-space
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    s = status -s
+    st = status
+    undo = !git clean -f && (git rebase --abort || git reset --hard)
 [advice]
-	pushNonFastForward = false
-	statusHints = false
+    pushNonFastForward = false
+    statusHints = false
 [branch]
-	autosetupmerge = true
+    autosetupmerge = true
 [color]
-        ui = true
+    ui = true
 [color "branch"]
-        current = yellow reverse
-        local = yellow
-        remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "diff"]
-        meta = yellow bold
-        frag = magenta bold
-        old = red bold
-        new = green bold
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
 [color "status"]
-        added = yellow
-        changed = green
-        untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 [core]
-	editor = vim
-        autocrlf = input
-        safecrlf = true
-        quotepath = false
-        excludesfile = ~/.gitignore
+    editor = vim
+    autocrlf = input
+    quotepath = false
+    excludesfile = ~/.gitignore
 [diff]
-	mnemonicprefix = true
+    mnemonicprefix = true
 [push]
-	default = tracking
+    default = tracking
 [rerere]
-	enabled = true
+    enabled = true

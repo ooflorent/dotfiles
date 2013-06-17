@@ -1,52 +1,29 @@
-### /home/fcailhol/.gitignore-boilerplates/Global/OSX.gitignore
+### OSX
 
 .DS_Store
-
-# Thumbnails
 ._*
-
-# Files that might appear on external disk
 .Spotlight-V100
 .Trashes
 
 
-### /home/fcailhol/.gitignore-boilerplates/Global/Windows.gitignore
-
-# Windows image file caches
-Thumbs.db 
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-
-### /home/fcailhol/.gitignore-boilerplates/Global/Tags.gitignore
-
-# Ignore tags created by etags and ctags
-TAGS
-!TAGS/
-tags
-!tags/
-
-
-### /home/fcailhol/.gitignore-boilerplates/Global/vim.gitignore
+### vim
 
 .*.sw[a-z]
 *.un~
 Session.vim
 
 
-### /home/fcailhol/.gitignore-boilerplates/Global/CVS.gitignore
+### VCS
 
 /CVS/*
 */CVS/*
 .cvsignore
 */.cvsignore
-
-### /home/fcailhol/.gitignore-boilerplates/Global/SVN.gitignore
-
 .svn/
 
+### eclipse
 
+.actionScriptProperties
+.classpath
+.project
+.settings/
