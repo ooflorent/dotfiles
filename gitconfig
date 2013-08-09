@@ -14,6 +14,7 @@
     st = status
     undo = !git clean -f && (git rebase --abort || git reset --hard)
     up = !git fetch origin && git rebase origin/master
+    rename = !git branch -m `git rev-parse --abbrev-ref HEAD`
 [advice]
     pushNonFastForward = false
     statusHints = false
