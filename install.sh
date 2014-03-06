@@ -7,6 +7,8 @@ for name in *; do
       echo "Creating $target"
       ln -s "$PWD/$name" "$target"
     fi
+  else
+    echo "Skipped $target"
   fi
 done
 
