@@ -19,7 +19,6 @@ main() {
   e_ask "Continue"
 
   if answer_is_yes; then
-    # OS X
     if is_osx; then
       install_xcode
       install_brew
@@ -38,15 +37,34 @@ main() {
       brew_install "tree"
       brew_install "wget" "--with-iri"
 
+      brew_cask "iterm2"
       brew_cask "google-chrome"
       brew_cask "spectacle"
       brew_cask "sublime-text3"
     fi
-
-    # Debian / Ubuntu
     if is_debian; then
       package_install "tig"
       package_install "tree"
+    fi
+  fi
+
+  e_header "Setup environment"
+  e_ask "Continue"
+
+  if answer_is_yes; then
+    if is_osx; then
+      execute "set_dock_prefs" "Dock"
+      execute "set_language_prefs" "Language & Region"
+      execute "set_keyboard_prefs" "Keyboard"
+      execute "set_trackpad_prefs" "Trackpad"
+      execute "set_iterm2_prefs" "iTerm2"
+      execute "set_terminal_prefs" "Terminal"
+      execute "set_textedit_prefs" "TextEdit"
+
+      e_ask "Apply changes now"
+      if answer_is_yes; then
+        force_apply
+      fi
     fi
   fi
 
@@ -60,6 +78,7 @@ source ./lib/util.sh
 
 if is_osx; then
   source ./lib/osx/brew.sh
+  source ./lib/osx/prefs.sh
   source ./lib/osx/xcode.sh
 elif is_debian; then
   source ./lib/deb.sh
