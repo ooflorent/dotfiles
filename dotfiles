@@ -1,103 +1,96 @@
 #!/usr/bin/env bash
 
+source ./lib/dot.sh
+
 link_dotfiles() {
-  e_header "Link dotfiles"
-  e_ask "Continue"
+  link "git/gitattribute"
+  link "git/gitconfig"
+  link "git/gitignore"
+  link "shell/curlrc"
+  link "shell/inputrc"
+  link "shell/wgetrc"
+}
 
-  if answer_is_yes; then
-    link "git/gitattribute"
-    link "git/gitconfig"
-    link "git/gitignore"
-    link "shell/curlrc"
-    link "shell/inputrc"
-    link "shell/wgetrc"
+install_mac_tools() {
+  brew_tap "homebrew/dupes"
+
+  brew_install "grep"
+  brew_install "openssh"
+  brew_install "git"
+  brew_install "ruby"
+  brew_install "tig"
+  brew_install "tree"
+  brew_install "wget"
+}
+
+install_mac_apps() {
+  brew_tap "caskroom/cask"
+  brew_tap "caskroom/fonts"
+  brew_tap "caskroom/versions"
+
+  brew_install "brew-cask"
+
+  cask_install "iterm2"
+  cask_install "google-chrome"
+  cask_install "spectacle"
+  cask_install "sublime-text3"
+}
+
+set_mac_prefs() {
+  subgroup "Dock" set_dock_prefs
+  subgroup "Language & Region" set_language_region_prefs
+  subgroup "Keyboard" set_keyboard_prefs
+  subgroup "Trackpad" set_trackpad_prefs
+  subgroup "TextEdit" set_textedit_prefs
+}
+
+set_dock_prefs() {
+  defaults write com.apple.dock autohide -bool true
+  defaults write com.apple.dock expose-animation-duration -float 0.1
+  defaults write com.apple.dock expose-group-by-app -bool false
+  defaults write com.apple.dock mineffect -string "scale"
+}
+
+set_language_region_prefs() {
+  defaults write NSGlobalDomain AppleLanguages -array "en" "fr"
+  defaults write NSGlobalDomain AppleLocale -string "en_US@currency=EUR"
+  defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
+  defaults write NSGlobalDomain AppleMetricUnits -bool true
+  defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+  sudo systemsetup -settimezone "Europe/Paris" > /dev/null
+}
+
+set_keyboard_prefs() {
+  defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+  defaults write NSGlobalDomain InitialKeyRepeat_Level_Saved -int 15
+  defaults write NSGlobalDomain KeyRepeat -int 2
+  defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+  defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+}
+
+set_trackpad_prefs() {
+  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+  defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+}
+
+set_textedit_prefs() {
+  defaults write com.apple.TextEdit PlainTextEncoding -int 4
+  defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+  defaults write com.apple.TextEdit RichText -int 0
+}
+
+defs() {
+  group "Link dotfiles" link_dotfiles
+
+  if is_mac?; then
+    group "Install tools" install_mac_tools
+    group "Install applications" install_mac_apps
+    group "Set system preferences" set_mac_prefs
   fi
 }
 
-install_osx() {
-  e_header "Install applications"
-  e_ask "Continue"
-
-  if answer_is_yes; then
-    install_xcode
-    install_brew
-
-    brew_tap "homebrew/dupes"
-    brew_tap "caskroom/cask"
-    brew_tap "caskroom/fonts"
-    brew_tap "caskroom/versions"
-
-    brew_install "brew-cask"
-    brew_install "grep"
-    brew_install "openssh"
-    brew_install "git"
-    brew_install "ruby"
-    brew_install "tig"
-    brew_install "tree"
-    brew_install "wget" "--with-iri"
-
-    brew_cask "iterm2"
-    brew_cask "google-chrome"
-    brew_cask "spectacle"
-    brew_cask "sublime-text3"
-  fi
-
-  e_header "Setup environment"
-  e_ask "Continue"
-
-  if answer_is_yes; then
-    execute "set_dock_prefs" "Dock"
-    execute "set_language_prefs" "Language & Region"
-    execute "set_keyboard_prefs" "Keyboard"
-    execute "set_trackpad_prefs" "Trackpad"
-    execute "set_iterm2_prefs" "iTerm2"
-    execute "set_terminal_prefs" "Terminal"
-    execute "set_textedit_prefs" "TextEdit"
-
-    e_ask "Apply changes now"
-    if answer_is_yes; then
-      force_apply
-    fi
-  fi
-}
-
-install_debian() {
-  e_header "Install applications"
-  e_ask "Continue"
-
-  if answer_is_yes; then
-    package_install "tig"
-    package_install "tree"
-  fi
-}
-
-main() {
-  ask_for_sudo
-  link_dotfiles
-
-  if is_osx; then
-    install_osx
-  elif is_debian; then
-    install_debian
-  fi
-
-  printf "\n"
-}
-
-readonly DOTFILES_DIRECTORY=$(cd "$(dirname "$0")" && pwd)
-
-source ./lib/core.sh
-source ./lib/util.sh
-
-if is_osx; then
-  source ./lib/osx/brew.sh
-  source ./lib/osx/prefs.sh
-  source ./lib/osx/xcode.sh
-elif is_debian; then
-  source ./lib/deb.sh
-else
-  e_error "This script is intended only for OS X and Debian"
-  exit 1
-fi
-
-main "$@"
+dot_run defs
