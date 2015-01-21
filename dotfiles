@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 readonly DOTFILES_DIRECTORY=$(cd "$(dirname "$0")" && pwd)
 
 source ./lib/core.sh
@@ -26,18 +28,12 @@ main() {
   link "shell/inputrc"
   link "shell/wgetrc"
 
-  link "bin/"
-
-  e_header "Setup environment"
+  e_header "Install applications"
 
   if is_osx; then
     install_xcode
     install_brew
-  fi
 
-  e_header "Install applications"
-
-  if is_osx; then
     brew_tap "homebrew/dupes"
     brew_tap "caskroom/cask"
     brew_tap "caskroom/fonts"
@@ -58,11 +54,12 @@ main() {
     brew_cask "spectacle"
     brew_cask "sublime-text3"
   fi
-
   if is_debian; then
     package_install "tig"
     package_install "tree"
   fi
+
+  printf "\n"
 }
 
 main "$@"
