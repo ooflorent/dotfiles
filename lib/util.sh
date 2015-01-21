@@ -28,23 +28,22 @@ e_result() {
     || e_error "$2"
 }
 
-execute() {
-  $1 &> /dev/null
-  e_result $? "${2:-$1}"
-}
-
-ask_confirmation() {
-  printf "\n"
-  print_warning "$@"
-  read -p "Continue? (y/n) " -n 1
+e_ask() {
+  printf " \033[1;36m?\033[0m  $@ (y/n) "
+  read -n 1
   printf "\n"
 }
 
-is_confirmed() {
+answer_is_yes() {
   if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     return 0
   fi
   return 1
+}
+
+execute() {
+  $1 &> /dev/null
+  e_result $? "${2:-$1}"
 }
 
 type_exists() {

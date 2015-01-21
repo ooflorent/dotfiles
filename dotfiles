@@ -19,44 +19,52 @@ main() {
   ask_for_sudo
 
   e_header "Link dotfiles"
+  e_ask "Continue"
 
-  link "git/gitattribute"
-  link "git/gitconfig"
-  link "git/gitignore"
-
-  link "shell/curlrc"
-  link "shell/inputrc"
-  link "shell/wgetrc"
+  if answer_is_yes; then
+    link "git/gitattribute"
+    link "git/gitconfig"
+    link "git/gitignore"
+    link "shell/curlrc"
+    link "shell/inputrc"
+    link "shell/wgetrc"
+  fi
 
   e_header "Install applications"
+  e_ask "Continue"
 
-  if is_osx; then
-    install_xcode
-    install_brew
+  if answer_is_yes; then
+    # OS X
+    if is_osx; then
+      install_xcode
+      install_brew
 
-    brew_tap "homebrew/dupes"
-    brew_tap "caskroom/cask"
-    brew_tap "caskroom/fonts"
-    brew_tap "caskroom/versions"
+      brew_tap "homebrew/dupes"
+      brew_tap "caskroom/cask"
+      brew_tap "caskroom/fonts"
+      brew_tap "caskroom/versions"
 
-    brew_install "brew-cask"
-    brew_install "grep"
-    brew_install "openssh"
-    brew_install "git"
-    brew_install "ruby"
-    brew_install "tig"
-    brew_install "tree"
-    brew_install "vim" "--override-system-vi"
-    brew_install "wget" "--with-iri"
-    brew_install "zsh"
+      brew_install "brew-cask"
+      brew_install "grep"
+      brew_install "openssh"
+      brew_install "git"
+      brew_install "ruby"
+      brew_install "tig"
+      brew_install "tree"
+      brew_install "vim" "--override-system-vi"
+      brew_install "wget" "--with-iri"
+      brew_install "zsh"
 
-    brew_cask "google-chrome"
-    brew_cask "spectacle"
-    brew_cask "sublime-text3"
-  fi
-  if is_debian; then
-    package_install "tig"
-    package_install "tree"
+      brew_cask "google-chrome"
+      brew_cask "spectacle"
+      brew_cask "sublime-text3"
+    fi
+
+    # Debian / Ubuntu
+    if is_debian; then
+      package_install "tig"
+      package_install "tree"
+    fi
   fi
 
   printf "\n"
