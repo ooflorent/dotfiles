@@ -1,20 +1,5 @@
 #!/usr/bin/env bash
 
-readonly DOTFILES_DIRECTORY=$(cd "$(dirname "$0")" && pwd)
-
-source ./lib/core.sh
-source ./lib/util.sh
-
-if is_osx; then
-  source ./lib/osx/brew.sh
-  source ./lib/osx/xcode.sh
-elif is_debian; then
-  source ./lib/deb.sh
-else
-  e_error "This script is intended only for OS X and Debian"
-  exit 1
-fi
-
 main() {
   ask_for_sudo
 
@@ -67,5 +52,20 @@ main() {
 
   printf "\n"
 }
+
+readonly DOTFILES_DIRECTORY=$(cd "$(dirname "$0")" && pwd)
+
+source ./lib/core.sh
+source ./lib/util.sh
+
+if is_osx; then
+  source ./lib/osx/brew.sh
+  source ./lib/osx/xcode.sh
+elif is_debian; then
+  source ./lib/deb.sh
+else
+  e_error "This script is intended only for OS X and Debian"
+  exit 1
+fi
 
 main "$@"
