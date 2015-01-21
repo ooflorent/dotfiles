@@ -51,9 +51,7 @@ main() {
       brew_install "ruby"
       brew_install "tig"
       brew_install "tree"
-      brew_install "vim" "--override-system-vi"
       brew_install "wget" "--with-iri"
-      brew_install "zsh"
 
       brew_cask "google-chrome"
       brew_cask "spectacle"
