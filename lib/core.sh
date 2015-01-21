@@ -9,10 +9,10 @@ link() {
   fi
 
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
-    rm -rf "$dst"
+    e_arrow "$1"
+  else
+    execute "ln -fs $src $dst" "$1 → $dst"
   fi
-
-  execute "ln -fs $src $dst" "$1 → $dst"
 }
 
 ask_for_sudo() {

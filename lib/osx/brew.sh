@@ -25,6 +25,9 @@ install_brew() {
     e_success "Homebrew"
   else
     e_arrow "Homebrew is already installed"
+    execute "brew update" "update"
+    execute "brew upgrade" "upgrade"
+    execute "brew cleanup" "cleanup"
   fi
 }
 
