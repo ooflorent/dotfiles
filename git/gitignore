@@ -1,0 +1,24 @@
+# Linux
+*~
+
+# Mac OS X
+._*
+.AppleDouble
+.DS_Store
+.localized
+.LSOverride
+.Spotlight-V100
+.Trashes
+Icon
+
+# Vim
+%*
+*.sw[a-z]
+*.un~
+.netrwhist
+Session.vim
+
+# Windows
+Desktop.ini
+ehthumbs.db
+Thumbs.db

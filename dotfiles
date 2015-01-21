@@ -1,0 +1,68 @@
+readonly DOTFILES_DIRECTORY=$(cd "$(dirname "$0")" && pwd)
+
+source ./lib/core.sh
+source ./lib/util.sh
+
+if is_osx; then
+  source ./lib/osx/brew.sh
+  source ./lib/osx/xcode.sh
+elif is_debian; then
+  source ./lib/deb.sh
+else
+  e_error "This script is intended only for OS X and Debian"
+  exit 1
+fi
+
+main() {
+  ask_for_sudo
+
+  e_header "Link dotfiles"
+
+  link "git/gitattribute"
+  link "git/gitconfig"
+  link "git/gitignore"
+
+  link "shell/curlrc"
+  link "shell/inputrc"
+  link "shell/wgetrc"
+
+  link "bin/"
+
+  e_header "Setup environment"
+
+  if is_osx; then
+    install_xcode
+    install_brew
+  fi
+
+  e_header "Install applications"
+
+  if is_osx; then
+    brew_tap "homebrew/dupes"
+    brew_tap "caskroom/cask"
+    brew_tap "caskroom/fonts"
+    brew_tap "caskroom/versions"
+
+    brew_install "brew-cask"
+    brew_install "grep"
+    brew_install "openssh"
+    brew_install "git"
+    brew_install "ruby"
+    brew_install "tig"
+    brew_install "tree"
+    brew_install "vim" "--override-system-vi"
+    brew_install "wget" "--with-iri"
+    brew_install "zsh"
+
+    brew_cask "google-chrome"
+    brew_cask "spectacle"
+    brew_cask "sublime-text3"
+  fi
+
+  if is_debian; then
+    package_install "tig"
+    package_install "tree"
+  fi
+}
+
+main "$@"

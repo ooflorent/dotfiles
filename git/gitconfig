@@ -1,0 +1,67 @@
+[user]
+  name = Florent Cailhol
+  email = florent.cailhol@gmail.com
+
+[alias]
+  # Shortcuts
+  ci = commit
+  co = checkout
+  st = status
+  # View the current working tree status using the short format
+  s = status -s
+  # Switch to a branch, creating it if necessary
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  # Delete a branch locally and on the origin remote
+  nuke = "!f() { git branch -D $1 && git push origin :$1; }; f"
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
+  # List contributors with number of commits
+  contributors = shortlog --summary --numbered
+  # Undo all changes
+  undo = !git clean -f && (git rebase --abort || git reset --hard)
+  # Better history graph
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[apply]
+  # Detect whitespace errors when applying a patch
+  whitespace = fix
+
+[core]
+  # Set `vim` as default editor
+  editor = vim
+  # Use custom `.gitignore`
+  excludesfile = ~/.gitignore
+  # Improve CRLF support
+  autocrlf = input
+  # Treat spaces before tabs and all kinds of trailing whitespace as an error
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+  # Safer `git rebase` on OS X
+  trustctime = false
+  # Prevent showing files whose names contain non-ASCII symbols as unversioned
+  precomposeunicode = false
+
+[color]
+  # Use colors in Git comands
+  ui = true
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = green
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[push]
+  # Only push the current branch corresponding to the remote branch
+  default = simple
