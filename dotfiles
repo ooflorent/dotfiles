@@ -36,52 +36,6 @@ install_mac_apps() {
   cask_install "sublime-text3"
 }
 
-set_mac_prefs() {
-  subgroup "Dock" set_dock_prefs
-  subgroup "Language & Region" set_language_region_prefs
-  subgroup "Keyboard" set_keyboard_prefs
-  subgroup "Trackpad" set_trackpad_prefs
-  subgroup "TextEdit" set_textedit_prefs
-}
-
-set_dock_prefs() {
-  defaults write com.apple.dock autohide -bool true
-  defaults write com.apple.dock expose-animation-duration -float 0.1
-  defaults write com.apple.dock expose-group-by-app -bool false
-  defaults write com.apple.dock mineffect -string "scale"
-}
-
-set_language_region_prefs() {
-  defaults write NSGlobalDomain AppleLanguages -array "en" "fr"
-  defaults write NSGlobalDomain AppleLocale -string "en_US@currency=EUR"
-  defaults write NSGlobalDomain AppleMeasurementUnits -string "Centimeters"
-  defaults write NSGlobalDomain AppleMetricUnits -bool true
-  defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
-
-  sudo systemsetup -settimezone "Europe/Paris" > /dev/null
-}
-
-set_keyboard_prefs() {
-  defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-  defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-  defaults write NSGlobalDomain InitialKeyRepeat_Level_Saved -int 15
-  defaults write NSGlobalDomain KeyRepeat -int 2
-  defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-  defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-}
-
-set_trackpad_prefs() {
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-  defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-  defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-  defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-}
-
-set_textedit_prefs() {
-  defaults write com.apple.TextEdit PlainTextEncoding -int 4
-  defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
-  defaults write com.apple.TextEdit RichText -int 0
-}
 
 defs() {
   group "Link dotfiles" link_dotfiles
@@ -89,7 +43,6 @@ defs() {
   if is_mac?; then
     group "Install tools" install_mac_tools
     group "Install applications" install_mac_apps
-    group "Set system preferences" set_mac_prefs
   fi
 }
 
