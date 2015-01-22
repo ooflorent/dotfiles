@@ -3,6 +3,7 @@ export readonly _PROGDIR=$(cd "$(dirname $0)" && pwd)
 export readonly _ARGS="$@"
 
 declare FORCE=1
+declare INTERACTIVE=1
 
 # Program informations
 # --------------------
@@ -44,14 +45,16 @@ Usage: $(progname) [options]
 
 Options:
   -f  override existing files
+  -i  prompt before every group
   -h  show this help
 EOF
 }
 
 dot_opts() {
-  while getopts "fh" OPTION; do
+  while getopts "fih" OPTION; do
     case $OPTION in
       f) FORCE=0 ;;
+      i) INTERACTIVE=0 ;;
       h) dot_usage; exit ;;
       ?) dot_usage; exit ;;
     esac
@@ -66,9 +69,13 @@ group() {
   local defs=$2
 
   e_header "$name"
-  e_confirm "Continue"
 
-  if yes?; then
+  if [ $INTERACTIVE -eq 0 ]; then
+    e_confirm "Continue"
+    if yes?; then
+      $defs
+    fi
+  else
     $defs
   fi
 }
