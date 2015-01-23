@@ -121,7 +121,7 @@ usage() {
 Usage: ${_PROGNAME} [options]
 Options:
   -f  override existing files
-  -i  prompt before every group
+  -i  prompt before every group and important change
   -h  show this help
 EOF
 }
@@ -190,7 +190,6 @@ oprompt() {
 # -----------
 
 exists() { [[ -f "$1" || -d "$1" || -L "$1" ]] ;}
-
 ln_s() { ln -s "$1" "$2" &> /dev/null ;}
 rm_f() { rm -f "$1" &> /dev/null ;}
 
@@ -198,8 +197,22 @@ link() {
   local src="$1"
   local dst="${2:-.$(basename $1)}"
 
-  [ $_FORCE -eq 0 ] && rm_f "${HOME}/${dst}"
-  oexe "ln -s ${_PROGDIR}/${src} ${HOME}/${dst}" "${dst} ${bold}→${reset} ${src}"
+  local full_src="${_PROGDIR}/${src}"
+  local full_dst="${HOME}/${dst}"
+
+  if exists "$full_dst"; then
+    if [[ $_INTERACTIVE = 0 ]]; then
+      if oconfirm " ${bold}${blue}❊${reset}  Overwrite ${bold}${full_dst}${reset}"; then
+        rm_f "$full_dst"
+      else
+        return 1
+      fi
+    elif [ $_FORCE -eq 0 ]; then
+      rm_f "$full_dst"
+    fi
+  fi
+
+  oexe "ln -s ${full_src} ${full_dst}" "${dst} ${bold}→${reset} ${src}"
 }
 
 # Homebrew
