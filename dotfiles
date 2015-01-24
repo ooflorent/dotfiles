@@ -160,8 +160,16 @@ readonly white=$(tput setaf 7)
 # ------
 
 oexe() {
+  local out="${2:-$1}"
+  local res
+
+  owait "$out"
+  
   $1 &> /dev/null
-  ores $? "${2:-$1}"
+  res=$?
+
+  printf "\r"
+  ores $res "${out}"
 }
 
 ores() {
@@ -172,6 +180,7 @@ ohead() { echo -e "\n${bold}$1${reset}" ;}
 odone() { echo -e " ${bold}${green}✔${reset}  $1" ;}
 ofail() { echo -e " ${bold}${red}✖${reset}  $1" ;}
 oskip() { echo -e " ${bold}${yellow}➜${reset}  $1" ;}
+owait() { echo -en " ${bold}${blue}❊${reset}  $1" ;}
 
 oconfirm() {
   echo -ne "$@? (y/n) "
