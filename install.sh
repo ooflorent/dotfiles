@@ -41,7 +41,6 @@ if is_platform "darwin"; then
   brewk cask install "google-chrome"
   brewk cask install "imagealpha"
   brewk cask install "imageoptim"
-  brewk cask install "iterm2"
   brewk cask install "spectacle"
   brewk cask install "vlc"
 fi

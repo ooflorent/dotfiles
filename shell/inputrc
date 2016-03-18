@@ -1,14 +1,14 @@
 # Disable beeping and window flashing
 set bell-style none
 
-# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
-set match-hidden-files off
+# Use case-insensitive TAB autocompletion
+set completion-ignore-case on
 
 # Immediately add a trailing slash when autocompleting symlinks to directories
 set mark-symlinked-directories on
 
-# Use case-insensitive TAB autocompletion
-set completion-ignore-case on
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+set match-hidden-files off
 
 # Auto list TAB completions
 set show-all-if-ambiguous off
