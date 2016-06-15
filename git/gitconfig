@@ -3,7 +3,7 @@
   email = florent.cailhol@gmail.com
 
 [alias]
-  cf = commit --amend -C HEAD
+  cf = commit -a --amend --no-edit
   ci = commit
   co = checkout
   st = status
@@ -25,6 +25,9 @@
   trustctime = false
   whitespace = trailing-space,space-before-tab
 
+[diff]
+  compactionHeuristic = 1
+
 [pager]
   diff = diff-so-fancy | less --tabs=4 -RFX
   show = diff-so-fancy | less --tabs=4 -RFX
@@ -37,9 +40,6 @@
   diff = auto
   status = auto
   ui = auto
-
-[help]
-  autocorrect = 1
 
 [pull]
   rebase = true
