@@ -23,17 +23,14 @@ if is_platform "darwin"; then
   if is_installed "brew"; then
     brew update
     brew upgrade
-    brew cleanup
+    brew cleanup -s --force
   else
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 
-  brew install "dos2unix"
-  brew install "flow"
   brew install "node"
   brew install "tig"
   brew install "tree"
-  brew install "vim" --override-system-vi
   brew install "zsh"
 
   brewk cask install "atom"
@@ -41,6 +38,7 @@ if is_platform "darwin"; then
   brewk cask install "google-chrome"
   brewk cask install "imagealpha"
   brewk cask install "imageoptim"
+  brewk cask install "slack"
   brewk cask install "spectacle"
   brewk cask install "vlc"
 fi
@@ -48,11 +46,16 @@ fi
 if is_installed "npm"; then
   npm install -g "npm@latest"
   npm install -g "diff-so-fancy"
+  npm install -g "npm-check-updates"
 fi
 
 if is_installed "apm"; then
   apm install "docblockr"
   apm install "editorconfig"
+  apm install "highlight-bad-chars"
+  apm install "language-babel"
+  apm install "language-diff"
+  apm install "language-graphql"
 fi
 
 link "git/gitconfig" ".gitconfig"
