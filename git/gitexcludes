@@ -1,23 +1,19 @@
 # Linux
 *~
 
-# Mac OS X
+# macOS
 ._*
-.AppleDouble
+.Trashes
 .DS_Store
-.localized
 .LSOverride
 .Spotlight-V100
-.Trashes
 
 # Vim
-%*
-*.sw[a-z]
-*.un~
-.netrwhist
-Session.vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
 
 # Windows
 Desktop.ini
-ehthumbs.db
 Thumbs.db

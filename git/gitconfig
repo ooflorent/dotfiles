@@ -1,7 +1,3 @@
-[user]
-  name = Florent Cailhol
-  email = florent.cailhol@gmail.com
-
 [alias]
   cf = commit -a --amend --no-edit
   ci = commit
@@ -16,11 +12,15 @@
   branches = branch -a
   remotes = remote -v
   contributors = shortlog --summary --numbered
+  please = push --force-with-lease
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+[apply]
+  whitespace = fix
 
 [core]
   autocrlf = input
-  editor = vim
+  attributesfile = ~/.gitattributes
   excludesfile = ~/.gitexcludes
   trustctime = false
   whitespace = trailing-space,space-before-tab
@@ -28,21 +28,25 @@
 [diff]
   compactionHeuristic = 1
 
-[pager]
-  diff = diff-so-fancy | less --tabs=4 -RFX
-  show = diff-so-fancy | less --tabs=4 -RFX
-
-[apply]
-  whitespace = fix
-
 [color]
   branch = auto
   diff = auto
   status = auto
   ui = auto
 
+[merge]
+  log = true
+
+[pager]
+  diff = diff-so-fancy | less --tabs=4 -RFX
+  show = diff-so-fancy | less --tabs=4 -RFX
+
 [pull]
   rebase = true
 
 [push]
   default = current
+
+[user]
+  name = Florent Cailhol
+  email = florent.cailhol@gmail.com
