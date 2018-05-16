@@ -1,19 +1,6 @@
-# Linux
 *~
-
-# macOS
 ._*
-.Trashes
 .DS_Store
-.LSOverride
+.sw[a-p]
 .Spotlight-V100
-
-# Vim
-[._]*.s[a-v][a-z]
-[._]*.sw[a-p]
-[._]s[a-v][a-z]
-[._]sw[a-p]
-
-# Windows
-Desktop.ini
-Thumbs.db
+.Trashes
