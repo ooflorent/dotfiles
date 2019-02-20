@@ -14,11 +14,17 @@
   whitespace = fix
 
 [core]
-  excludesfile = ~/.gitexcludes
+  excludesfile = ~/.gitignore
   whitespace = trailing-space,space-before-tab
+  trustctime = false
+  precomposeunicode = false
+  untrackedCache = true
 
 [color]
   ui = auto
+
+[diff]
+  renames = copies
 
 [fetch]
   prune = true

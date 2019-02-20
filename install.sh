@@ -11,10 +11,10 @@ _link() {
   fi
 }
 
-_link "$DIR/git/gitconfig" "$HOME/.gitconfig"
-_link "$DIR/git/gitexcludes" "$HOME/.gitexcludes"
-_link "$DIR/ssh/config" "$HOME/.ssh/config"
-_link "$DIR/zsh/zshrc" "$HOME/.zshrc"
+ln -sf "$DIR/.editorconfig" "$HOME/.editorconfig"
+ln -sf "$DIR/.gitconfig" "$HOME/.gitconfig"
+ln -sf "$DIR/.gitignore" "$HOME/.gitignore"
+ln -sf "$DIR/.zshrc" "$HOME/.zshrc"
 
 # brew bundle install
 

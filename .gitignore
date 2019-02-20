@@ -1,7 +1,10 @@
-*~
+# macOS
 ._*
 .DS_Store
-.sw[a-p]
 .Spotlight-V100
 .Trashes
+
+# Editors
+*~
+.sw[a-p]
 .vscode
