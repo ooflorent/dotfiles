@@ -20,6 +20,9 @@
 [color]
   ui = auto
 
+[fetch]
+  prune = true
+
 [merge]
   log = true
 
@@ -27,7 +30,7 @@
   rebase = true
 
 [push]
-  default = simple
+  default = current
   followTags = true
 
 [user]
