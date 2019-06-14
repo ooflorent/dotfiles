@@ -1,46 +1,39 @@
-# Directory options
+# Environment
+setopt COMBINING_CHARS
+setopt INTERACTIVE_COMMENTS
+
+# Directory
 setopt AUTO_CD
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
-setopt EXTENDED_GLOB
+setopt CDABLE_VARS
 setopt MULTIOS
+setopt EXTENDED_GLOB
 unsetopt CLOBBER
 
-# History options
-HISTFILE=~/.zhistory
-HISTSIZE=1000
-SAVEHIST=1000
+# History
+setopt BANG_HIST
 setopt EXTENDED_HISTORY
-setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
-setopt SHARE_HISTORY
+setopt HIST_BEEP
+
+export HISTFILE=$HOME/.zhistory
+export HISTSIZE=10000
+export SAVEHIST=$HISTSIZE
 
 # Keybindings
 bindkey -e
-bindkey "^[^[[D" backward-word         # alt-left
-bindkey "^[^[[C" forward-word          # alt-right
-bindkey "^[^?" backward-kill-word      # alt-backspace
-
-# Enable colors
-alias grep="grep --color=auto"
-alias less="less -R"
-alias ls="ls -FG"
-
-# Utilities
-alias ll="ls -lh"
-alias la="ll -A"
-
-# Safeguards
-alias cp="cp -i"
-alias ln="ln -i"
-alias mv="mv -i"
-alias rm="rm -i"
+bindkey "^[^[[D" backward-word         # [Option] + [Left]
+bindkey "^[^[[C" forward-word          # [Option] + [Right]
 
 # Completion
 # setopt ALWAYS_TO_END
@@ -66,3 +59,6 @@ precmd() { vcs_info }
 
 PROMPT='%c%F{242}${vcs_info_msg_0_}%f %(?.%F{blue}.%F{red})%#%f '
 RPROMPT=''
+
+# Load aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
