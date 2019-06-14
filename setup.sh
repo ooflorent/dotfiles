@@ -8,8 +8,9 @@ else
   brew cleanup
 fi
 
-# ----------------------
+#
 # Tools and applications
+#
 
 brew install git
 brew install git-lfs
@@ -29,8 +30,9 @@ brew cask install transmission
 brew cask install visual-studio-code
 brew cask install vlc
 
-# ---------------
+#
 # Customize macOS
+#
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -107,14 +109,6 @@ defaults write com.apple.dock show-recents -bool false
 # Disable animations
 defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.dock launchanim -bool false
-
-# Top right screen corner → Desktop
-defaults write com.apple.dock wvous-tr-corner -int 4
-defaults write com.apple.dock wvous-tr-modifier -int 0
-
-# Bottom right screen corner → Lock Screen
-defaults write com.apple.dock wvous-br-corner -int 13
-defaults write com.apple.dock wvous-br-modifier -int 0
 
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
