@@ -1,0 +1,15 @@
+# Enable colors
+alias grep="grep --color=auto"
+alias less="less -R"
+alias ls="ls -FG"
+
+# Utilities
+alias ll="ls -lh"
+alias la="ll -A"
+alias mkdir="mkdir -p"
+
+# Safeguards
+alias cp="cp -i"
+alias ln="ln -i"
+alias mv="mv -i"
+alias rm="rm -i"
