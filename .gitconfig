@@ -8,6 +8,7 @@
   df = diff
   dfs = diff --ignore-all-space
   undo = !git clean -f && (git rebase --abort || git reset --hard)
+  trash = !git branch | grep -v "master" | grep -v $(git symbolic-ref --short HEAD) | xargs git branch -D
   please = push --force-with-lease
 
 [apply]
