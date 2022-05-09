@@ -1,5 +1,5 @@
 [alias]
-  cf = commit --amend --no-edit
+  fix = commit --amend --no-edit
   ci = commit
   co = checkout
   go = checkout -b
@@ -7,8 +7,8 @@
   s = status -s
   df = diff
   dfs = diff --ignore-all-space
-  undo = !git clean -f && (git rebase --abort || git reset --hard)
-  trash = !git branch | grep -v "master" | grep -v $(git symbolic-ref --short HEAD) | xargs git branch -D
+  undo = !git clean -dff && (git rebase --abort || git reset --hard)
+  trash = !git branch | grep -v "master" | grep -v "main" | grep -v "\\*" | xargs git branch -D
   please = push --force-with-lease
 
 [apply]
@@ -25,10 +25,14 @@
   ui = auto
 
 [diff]
+  colorMoved = default
   renames = copies
 
 [fetch]
   prune = true
+
+[init]
+  defaultBranch = main
 
 [merge]
   log = true
@@ -39,6 +43,9 @@
 [push]
   default = current
   followTags = true
+
+[rebase]
+  autosquash = true
 
 [user]
   name = Florent Cailhol
