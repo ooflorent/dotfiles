@@ -1,6 +1,7 @@
 [alias]
   fix = commit --amend --no-edit
   ci = commit
+  cp = cherry-pick
   co = checkout
   go = checkout -b
   st = status
@@ -30,6 +31,9 @@
 
 [fetch]
   prune = true
+
+[help]
+  autoCorrect = immediate
 
 [init]
   defaultBranch = main

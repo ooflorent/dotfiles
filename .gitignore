@@ -1,10 +1,20 @@
 # macOS
 ._*
+.AppleDouble
 .DS_Store
+.localized
+.LSOverride
 .Spotlight-V100
 .Trashes
 
 # Editors
+%*
 *~
 .sw[a-p]
 .vscode
+Session.vim
+
+# Windows
+Desktop.ini
+ehthumbs.db
+Thumbs.db
